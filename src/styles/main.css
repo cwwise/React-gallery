@@ -1,0 +1,53 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Segoe UI Symbol";
+  background-color: #222; }
+
+.content {
+  width: 100%;
+  height: 100%; }
+
+/* stage -- start */
+.stage {
+  position: relative;
+  width: 100%;
+  height: 680px; }
+
+/* img -- start */
+.img-section {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #ddd; }
+  .img-figure {
+    position: absolute;
+    width: 320px;
+    height: 360px;
+    margin: 0;
+    padding: 40px;
+    background-color: #fff;
+    box-sizing: border-box; }
+    .img-figure img {
+      height: 240px;
+      width: 240px; }
+
+  figcaption {
+    text-align: center; }
+    figcaption .img-title {
+      margin: 20px 0 0 0;
+      color: #a7a0a2;
+      font-size: 16px; }
+
+/* img -- end */
+/* controller -- start */
+.controller-nav {
+  position: absolute;
+  left: 0;
+  bottom: 30px;
+  z-index: 101;
+  width: 100%;
+  text-align: center; }
+
+/*# sourceMappingURL=main.css.map */
