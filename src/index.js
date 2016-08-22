@@ -13,9 +13,9 @@ imageDatas = (function genImageURL(imageDataArray) {
     for (var i = 0; i < imageDataArray.length; i++) {
       var imageData = imageDataArray[i];
       // 本地路径
-      imageData.imageURL = require("./images/" + imageData.fileName);
+      // imageData.imageURL = require("./images/" + imageData.fileName);
       //网络路径
-      // imageData.imageURL = "https://oc9rdv0u6.qnssl.com/" + imageData.fileName;
+      imageData.imageURL = "https://oc9rdv0u6.qnssl.com/" + imageData.fileName;
 
       imageDataArray[i] = imageData;
     }
