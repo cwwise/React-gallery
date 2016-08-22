@@ -1,10 +1,18 @@
+@font-face {
+  font-family: 'iconfont';
+  src: url('../fonts/icons/turn-arrow.eot') format("embedded-opentype"), /* IE9*/
+  url('../fonts/icons/turn-arrow.woff') format('woff'), /* chrome、firefox */
+  url('../fonts/icons/turn-arrow.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('../fonts/icons/turn-arrow.svg') format('svg'); /* iOS 4.1- */
+}
+
 html, body {
   width: 100%;
   height: 100%;
 
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Segoe UI Symbol";
 
-  background-color: #222;
+  background-color: #ddd;
 }
 
 .content {
@@ -18,7 +26,7 @@ html, body {
   position: relative;
 
   width: 100%;
-  height: 680px;
+  height: 700px;
 }
 
 /* img -- start */
@@ -31,6 +39,8 @@ html, body {
 
   background-color: #ddd;
 
+  perspective: 1800px;
+
   @at-root {
     .img-figure {
 
@@ -41,14 +51,25 @@ html, body {
       margin: 0;
       padding: 40px;
 
+      box-sizing: border-box;
       background-color: #fff;
 
-      box-sizing: border-box;
+      cursor: pointer;
+      transform-origin: 0 50% 0;
+
+      transform-style: preserve-3d;
+
+      transition: transform 0.6s ease-in-out,left 0.6s ease-in-out, top 0.6s ease-in-out;
+
+      &.is-inverse {
+        transform: translate(320px) rotateY(180deg);
+      }
+
       img {
+        z-index: 2;
         height: 240px;
         width: 240px;
       }
-
     }
 
     figcaption {
@@ -61,8 +82,34 @@ html, body {
         font-size: 16px;
       }
 
-    }
+      .img-back {
+        position: absolute;
+        left: 0;
+        top: 0;
 
+        width: 100%;
+        height: 100%;
+        padding: 30px;
+        overflow: auto;
+
+
+        color: #a7a0a2;
+        text-align: left;;
+        font-size: 22px;
+        line-height: 1.25;
+
+        background: #fff;
+
+        box-sizing: border-box;
+        transform: rotateY(180deg) translateZ(1px);;
+        backface-visibility: hidden;
+
+        p {
+          margin: 0;
+        }
+
+      }
+    }
   }
 
 }
@@ -75,11 +122,54 @@ html, body {
 .controller-nav {
   position: absolute;
   left: 0;
-  bottom: 30px;
+  bottom: 15px;
 
   z-index: 101;
-
   width: 100%;
 
   text-align: center;
+
+  @at-root {
+      .controller-unit {
+        display: inline-block;
+        height: 30px;
+        width: 30px;
+        padding: 0px;
+        margin: 0 5px;
+
+        text-align: center;
+        vertical-align: middle;
+
+        cursor: pointer;
+        background-color: #aaa;
+        border-radius: 50%;
+
+        transform: scale(0.5);
+        transition: transform 0.6s ease-in-out,background-color 0.3s;
+
+        &.is-center {
+          background-color: #888;
+          transform: scale(1);
+
+          &::after {
+             color: #fff;
+             font-family: "iconfont";
+             line-height: 30px;
+             content: "\e600";
+
+             -webkit-font-smoothing: antialiased;
+             -moz-osx-font-smoothing: grayscale;
+          }
+
+          &.is-inverse {
+            background-color: #555;
+
+            transform: rotate(180deg);
+          }
+
+        }
+
+      }
+
+  }
 }

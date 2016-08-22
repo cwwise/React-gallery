@@ -3,11 +3,35 @@ import ReactDOM from 'react-dom';
 
 import './styles/main.css';
 import ImageFigure from './components/ImageFigure'
+import ControllerUnit from './components/ControllerUnit'
 
 
 var getRangeRandom = (low, high)=>Math.floor(Math.random() * (high - low) + low);
 
+/*
+ * 获取 0~30° 之间的一个任意正负值
+ */
+function get30DegRandom() {
+  return ((Math.random() > 0.5 ? '' : '-') + Math.ceil(Math.random() * 30));
+}
+
 class App extends Component {
+
+  state: {
+    imageArrangeArray: [
+        /*{
+          pos: {
+            left: '0',
+            top: '0'
+          },
+          rotate: 0, //旋转角度
+          isInverse: false,
+          isCenter: false
+
+        }*/
+    ]
+
+  }
 
   constructor(props) {
     super(props);
@@ -32,11 +56,16 @@ class App extends Component {
       var dataArray = this.props.imageDataArray;
       var tempArray = [];
       for (var i = 0; i < dataArray.length; i++) {
-          var pos = {
-              left: 0,
-              top: 0
+          var value = {
+              pos: {
+                left: 0,
+                top: 0
+              },
+              rotate: 0,
+              isInverse: false,
+              isCenter: false
           };
-          tempArray.push(pos);
+          tempArray.push(value);
       }
 
        this.state = {
@@ -44,6 +73,7 @@ class App extends Component {
        };
 
   }
+
 
   // 组件加载以后计算其位置
   componentDidMount() {
@@ -90,6 +120,30 @@ class App extends Component {
     this.rearrange(0);
   }
 
+  /**
+   * 翻转图片
+   */
+  inverse(index) {
+    return ()=> {
+      var imgsArrangeArr = this.state.imageArrangeArray;
+      imgsArrangeArr[index].isInverse = !imgsArrangeArr[index].isInverse;
+
+      this.setState({
+        imageArrangeArray: imgsArrangeArr
+      });
+    }
+  }
+
+  /*利用rearramhe函数
+   *居中对应index的图片
+   *
+   */
+  center(index) {
+    return ()=> {
+      this.rearrange(index);
+    }
+  }
+
   //重新布局所有图片
   rearrange(centerIndex) {
 
@@ -109,7 +163,11 @@ class App extends Component {
       topImgSpiceIndex = 0,
       imgsArrangeCenterArr = imgsArrangeArr.splice(centerIndex, 1);
 
-      imgsArrangeCenterArr[0] = centerPos;
+      imgsArrangeCenterArr[0].pos = centerPos;
+      imgsArrangeCenterArr[0].isCenter = true;
+      //居中的图片不需要旋转
+      imgsArrangeCenterArr[0].rotate = 0;
+
       //取出要布局上测的图片的状态信息
       topImgSpiceIndex = Math.floor(Math.random() * (imgsArrangeArr.length - topImgNum));
       imgsArrangTopArr = imgsArrangeArr.splice(topImgSpiceIndex, topImgNum);
@@ -117,8 +175,12 @@ class App extends Component {
       //布局位于上侧的图片
      imgsArrangTopArr.forEach((value, index)=> {
        imgsArrangTopArr[index] = {
-           top: getRangeRandom(vPosRangeTopY[0], vPosRangeTopY[1]),
-           left: getRangeRandom(vPosRangeX[0], vPosRangeX[1])
+           pos: {
+             top: getRangeRandom(vPosRangeTopY[0], vPosRangeTopY[1]),
+             left: getRangeRandom(vPosRangeX[0], vPosRangeX[1])
+           },
+           rotate: get30DegRandom(),
+           isCenter: false
        };
      });
 
@@ -133,8 +195,12 @@ class App extends Component {
          hPosRangeLORX = hPosRangeRightSecX
        }
        imgsArrangeArr[i] = {
-           top: getRangeRandom(hPosRangeY[0], hPosRangeY[1]),
-           left: getRangeRandom(hPosRangeLORX[0], hPosRangeLORX[1])
+           pos: {
+             top: getRangeRandom(hPosRangeY[0], hPosRangeY[1]),
+             left: getRangeRandom(hPosRangeLORX[0], hPosRangeLORX[1])
+           },
+           rotate: get30DegRandom(),
+           isCenter: false
        }
      }
 
@@ -156,8 +222,15 @@ class App extends Component {
     var dataArray = this.props.imageDataArray;
     dataArray.forEach( function(value, index) {
 
+        controllerUnits.push(<ControllerUnit key={index}
+                                             arrange={this.state.imageArrangeArray[index]}
+                                             center={this.center(index)}
+                                             inverse={this.inverse(index)} />)
         imageFigures.push(<ImageFigure arrange={this.state.imageArrangeArray[index]}
-                              key={index} data={value} ref={'imageFigure'+index}/>);
+                              key={index} data={value}
+                              center={this.center(index)}
+                              inverse={this.inverse(index)}
+                              ref={'imageFigure'+index}/>);
     }.bind(this));
 
     return (
