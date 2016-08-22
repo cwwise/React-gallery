@@ -1,6 +1,6 @@
 
 #node_modules目录
-./node_modules
+node_modules
 
 #build目录
-./build
+build
