@@ -4,13 +4,12 @@
 Build Status Dependency Status
 使用ReactJS构架的图片画廊应用-为慕课网[《React实战》](http://www.imooc.com/view/507)课程对应的实战项目
 
-demo展示地址: [Gallery By React](https://www.cwcoder.com/gallery/index.html)
+demo展示地址: [Gallery By React](https://www.cwcoder.top/gallery/index.html)
 
 ## 项目结构
 [create-react-app](https://github.com/facebookincubator/create-react-app)google出品的入门React的工具，简单实用，推荐入门学习使用。
 
-使用 需要注意的是 如果进行打包 `npm run build` 需要设置 `package.json` 中 ` "homepage": ""`
-才能很好的运行。
+使用 需要注意的是 如果进行打包 `npm run build` 需要设置 `package.json` 中 ` "homepage": ""`才能很好的运行。
 
 
 ## To build the examples locally, run:
