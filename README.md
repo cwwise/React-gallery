@@ -1,5 +1,4 @@
 # Gallery By React
----
 
 Build Status Dependency Status
 使用ReactJS构架的图片画廊应用-为慕课网[《React实战》](http://www.imooc.com/view/507)课程对应的实战项目
