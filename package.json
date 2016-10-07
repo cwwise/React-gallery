@@ -1,12 +1,13 @@
 {
   "name": "React-gallery",
   "version": "0.0.1",
-  "homepage": "https://www.cwcoder.com/gallery-01",
   "private": true,
+  "homepage": "https://wei18810109052.github.io/React-gallery/",
   "devDependencies": {
     "react-scripts": "0.2.1"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
     "react": "^15.2.1",
     "react-dom": "^15.2.1"
   },
