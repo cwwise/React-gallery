@@ -3,7 +3,7 @@
 Build Status Dependency Status
 使用ReactJS构架的图片画廊应用-为慕课网[《React实战》](http://www.imooc.com/view/507)课程对应的实战项目
 
-demo展示地址: [Gallery By React](https://wei18810109052.github.io/React-gallery/)
+demo展示地址: [Gallery By React](https://cwwise.github.io/React-gallery/)
 
 ## 项目结构
 [create-react-app](https://github.com/facebookincubator/create-react-app)google出品的入门React的工具，简单实用，推荐入门学习使用。
